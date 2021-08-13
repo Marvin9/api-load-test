@@ -22,17 +22,21 @@ type AnalyzedData struct {
 func (a AnalyzedData) Display() {
 	modes := ""
 	for _, mode := range a.Mode {
-		modes += fmt.Sprintf("%v, ", mode)
+		modes += fmt.Sprintf("%.3f, ", mode)
 	}
 	modes = strings.TrimSuffix(modes, ", ")
 	fmt.Printf(`
-Mean: %vms
-Median: %vms
-Mode: %vms
-Range: %vms
-Standard Deviation: %vms
-Min: %vms
-Max: %vms
+	Summary
+	----------------------------------
+	| Mean:               %.3fms
+	| Median:             %.3fms
+	| Mode:               %vms
+	| Range:              %.3fms
+	| Standard Deviation: %.3fms
+	| Min:                %.3fms
+	| Max:                %.3fms
+	---------------------------------
+
 `, a.Mean, a.Median, modes, a.Range, a.StandardDeviation, a.Min, a.Max)
 }
 
