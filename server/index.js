@@ -15,7 +15,7 @@ const server = (req, res) => {
   setTimeout(() => {
     res.end();
     console.timeEnd(`request-${j}`);
-  }, 256)
+  }, 100)
 };
 
 http
