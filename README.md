@@ -1,10 +1,3 @@
-<center>
-    <img src="assets/load-test.png" width="50px" />
-    <div style="font-size:6px; opacity:0.5;">Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-</center>
-
-<br />
-
 # api-load-test
 
 > simple and elegant load testing tool.
