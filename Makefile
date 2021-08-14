@@ -1,7 +1,4 @@
-load:
-	clear
-	go run main.go
-
-dummy_server:
-	clear
-	cd server && npm run serve
+build:
+	rm -rf bin
+	mkdir bin
+	go build -o bin

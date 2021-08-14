@@ -10,13 +10,15 @@ import (
 )
 
 type AnalyzedData struct {
-	Mean              float64
-	Median            float64
-	Mode              []float64
-	Range             float64
-	StandardDeviation float64
-	Min               float64
-	Max               float64
+	Mean                  float64
+	Median                float64
+	Mode                  []float64
+	Range                 float64
+	StandardDeviation     float64
+	Min                   float64
+	Max                   float64
+	NintiethPercentaile   float64
+	NintyFifthPercentaile float64
 }
 
 func (a AnalyzedData) Display() {
@@ -35,9 +37,11 @@ func (a AnalyzedData) Display() {
 	| Standard Deviation: %.3fms
 	| Min:                %.3fms
 	| Max:                %.3fms
+	| 90th Percentaile:   %.3fms
+	| 95th Percentaile:   %.3fms
 	---------------------------------
 
-`, a.Mean, a.Median, modes, a.Range, a.StandardDeviation, a.Min, a.Max)
+`, a.Mean, a.Median, modes, a.Range, a.StandardDeviation, a.Min, a.Max, a.NintiethPercentaile, a.NintyFifthPercentaile)
 }
 
 func checkCalcError(operation string, err error) {
@@ -70,13 +74,21 @@ func Analysis(report Report) AnalyzedData {
 	stdDev, err := stats.StandardDeviation(performance)
 	checkCalcError("standard deviation", err)
 
+	nintiethPercentaile, err := stats.Percentile(performance, float64(90))
+	checkCalcError("90th percentaile", err)
+
+	nintyFifthPercentaile, err := stats.Percentile(performance, float64(95))
+	checkCalcError("95th percentaile", err)
+
 	return AnalyzedData{
-		Mean:              mean,
-		Median:            median,
-		Mode:              mode,
-		Range:             max - min,
-		StandardDeviation: stdDev,
-		Min:               min,
-		Max:               max,
+		Mean:                  mean,
+		Median:                median,
+		Mode:                  mode,
+		Range:                 max - min,
+		StandardDeviation:     stdDev,
+		Min:                   min,
+		Max:                   max,
+		NintiethPercentaile:   nintiethPercentaile,
+		NintyFifthPercentaile: nintyFifthPercentaile,
 	}
 }
