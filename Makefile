@@ -1,6 +1,11 @@
-load:
+build:
+	rm -rf bin
+	mkdir bin
+	go build -o bin
+
+run: build
 	clear
-	go run main.go
+	./bin/api-load-test --endpoint "http://localhost:8000" -r 10 -u 2 $(overrides)
 
 dummy_server:
 	clear
