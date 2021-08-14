@@ -31,11 +31,15 @@ Flags:
 
 - build
 
-  `docker build -t api_load_test .`
+  ```
+  docker build -t api_load_test .
+  ```
 
 - run
 
-  `docker run --rm -it --ulimit nofile=<softlimit>:<hardlimit> api_load_test --endpoint="http://ip:port/endpoint" --rate 100 --until 5`
+  ```
+  docker run --rm -it --ulimit nofile=<softlimit>:<hardlimit> api_load_test --endpoint="http://ip:port/endpoint" --rate 100 --until 5
+  ```
 
   [ulimit](https://docs.oracle.com/cd/E37670_01/E75728/html/ch04s16.html)
 
