@@ -5,6 +5,6 @@ if: (type == push) OR (type == pull_request)
 go:
   - 1.16
 
-script:
+scripts:
   - make build
   - make test

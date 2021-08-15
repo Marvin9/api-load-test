@@ -109,5 +109,5 @@ func runErrorThrowingTest(test string, f func(), errMessageShouldContain string,
 		}
 		return
 	}
-	t.Errorf("test %v was expected to fail.", test)
+	t.Errorf("test %v was expected to fail", test)
 }
