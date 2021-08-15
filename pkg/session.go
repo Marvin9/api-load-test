@@ -3,6 +3,7 @@ package pkg
 import (
 	"bytes"
 	"fmt"
+	"log"
 	"os/exec"
 	"strconv"
 	"strings"
@@ -43,14 +44,17 @@ func (s *Session) getMaxDescriptors() (int64, error) {
 
 // generates helpful numbers to control loop, time and prediction(resource exhaust), for given rate & limit in session
 func (s *Session) GenerateMetadata() SessionMetadata {
+	if s.Rate <= 0 {
+		log.Fatal("request rate should be non-zero")
+	}
 	var metadata SessionMetadata
 	second := time.Second
-	metadata.constantRate = float64((second / time.Millisecond) / time.Duration(s.Rate))
-	metadata.sleep = time.Millisecond * time.Duration(metadata.constantRate)
-	metadata.totalRequests = int64(s.Rate * s.Until)
+	metadata.ConstantRate = float64((second / time.Millisecond) / time.Duration(s.Rate))
+	metadata.Sleep = time.Millisecond * time.Duration(metadata.ConstantRate)
+	metadata.TotalRequests = int64(s.Rate * s.Until)
 	// skip the error for now [no side effects], descriptors data is just used for information
 	mxDescriptors, _ := s.getMaxDescriptors()
-	metadata.fileDescriptorsLimit = mxDescriptors
+	metadata.FileDescriptorsLimit = mxDescriptors
 	return metadata
 }
 

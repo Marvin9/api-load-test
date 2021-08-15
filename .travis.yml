@@ -1,0 +1,10 @@
+language: go
+
+if: (type == push) OR (type == pull_request)
+
+go:
+  - 1.16
+
+script:
+  - make build
+  - make test
