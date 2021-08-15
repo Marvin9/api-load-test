@@ -53,14 +53,14 @@ func (s *Session) simulateRequest(uniqueId int64) {
 }
 
 func (s *Session) LoadTest(metadata SessionMetadata) {
-	s.Data = make([]RequestData, metadata.totalRequests+1)
+	s.Data = make([]RequestData, metadata.TotalRequests+1)
 	metadata.info()
 
 	fmt.Print("\n\033[34mLoad Testing...\033[0m")
-	for i := int64(1); i <= metadata.totalRequests; i++ {
+	for i := int64(1); i <= metadata.TotalRequests; i++ {
 		s.wg.Add(1)
 		go s.simulateRequest(i)
-		time.Sleep(metadata.sleep)
+		time.Sleep(metadata.Sleep)
 	}
 	s.wg.Wait()
 }
